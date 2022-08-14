@@ -4,11 +4,12 @@ import Home from '../pages/Home';
 
 const Paths = () => {
     return (
-        <div className="routes_container">
+        <div className="px-3">
             <BrowserRouter>
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/pipes" element={<Home />} />
                 </Routes>
             </BrowserRouter>
         </div>

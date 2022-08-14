@@ -1,7 +1,7 @@
 import Routes from './routes';
 const App = () => {
     return (
-        <div className="App">
+        <div className="w-screen h-screen" style={{backgroundColor: "#fafafa"}}>
             <Routes />
         </div>
     );

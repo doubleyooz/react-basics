@@ -1,5 +1,11 @@
+import List from '../components/List';
+
 const Pipes = () => {
-    return <> <div>Pipes</div></>
-}
+    return (
+        <div>
+            <List title="Initial Activity" colour="#ffab00"/>
+        </div>
+    );
+};
 
 export default Pipes;

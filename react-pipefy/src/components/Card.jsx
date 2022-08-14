@@ -1,20 +1,23 @@
 const Label = ({ type }) => {
     let colour = '',
         text = '';
+    
     switch (type) {
         case 0:
             colour = ' bg-green-500';
             text = 'Trivial';
+            break;
 
         case 1:
             colour = ' bg-yellow-500';
             text = 'Average';
-
+            break;
         default:
             colour = ' bg-red-600';
             text = 'High';
+            break;
     }
-
+    
     return (
         <div
             className={
@@ -65,7 +68,7 @@ const Card = ({ label, title, type, requester }) => {
     return (
         <div className="p-3 pl-2 bg-white">
             {label && <Label type={label} />}
-            <span className="font-bold text-sm">{title}</span>
+            <span className="font-bold text-sm mr-5">{title}</span>
             <div className="flex flex-col gap-2 mt-2">
                 <Property
                     title="type"

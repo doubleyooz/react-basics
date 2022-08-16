@@ -5,7 +5,7 @@ import Pipes from '../pages/Pipes';
 
 const Paths = () => {
     return (
-        <div className="px-3">
+        <div className="">
             <BrowserRouter>
                 <NavBar />
                 <Routes>

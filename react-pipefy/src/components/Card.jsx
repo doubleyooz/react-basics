@@ -17,7 +17,7 @@ const Label = ({ type }) => {
             text = 'High';
             break;
     }
-    
+
     return (
         <div
             className={
@@ -66,7 +66,7 @@ const Property = ({ title, description, marker}) => {
 
 const Card = ({ label, title, type, requester }) => {
     return (
-        <div className="p-3 pl-2 bg-white">
+        <div className="p-3 pl-2 mb-2 bg-white">
             {label && <Label type={label} />}
             <span className="font-bold text-sm mr-5">{title}</span>
             <div className="flex flex-col gap-2 mt-2">

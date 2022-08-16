@@ -32,7 +32,6 @@ const Label = ({ type }) => {
 };
 
 const Property = ({ title, description, marker}) => {
-    console.log(marker)
     return (
         <div className="flex gap-2">
             <svg
@@ -66,7 +65,7 @@ const Property = ({ title, description, marker}) => {
 
 const Card = ({ label, title, type, requester }) => {
     return (
-        <div className="p-3 pl-2 mb-2 bg-white">
+        <div className="p-3 pl-2 mb-2 bg-white hover:shadow-md">
             {label && <Label type={label} />}
             <span className="font-bold text-sm mr-5">{title}</span>
             <div className="flex flex-col gap-2 mt-2">

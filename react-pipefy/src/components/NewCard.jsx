@@ -7,6 +7,21 @@ import { ReactComponent as Edit } from '../assets/edit.svg';
 import { ReactComponent as Share } from '../assets/share.svg';
 import { ReactComponent as Ticket } from '../assets/ticket.svg';
 
+const Select = ({ options }) => {
+    return (
+        <select
+            className="h-10 w-full rounded px-4 items-center cursor-pointer appearance-none text-xs border-none bg-gray-200 hover:bg-white"
+            type="text"
+            name="type"
+            placeholder="Select an option"
+        >
+            {options.map((item) => (
+                <option value={item}>{item}</option>
+            ))}
+        </select>
+    );
+};
+
 const FormButton = ({ Icon, text, setTrigger, trigger }) => {
     return (
         <div>
@@ -38,6 +53,18 @@ const NewCard = ({ trigger, setTrigger }) => {
     const onSubmit = (data) => {
         console.log(data);
     };
+
+    const typeOptions = [
+        'User login (add / remove)',
+        'Internet Connection issue',
+        'Telecom Issue',
+        'Software installation',
+        'Equipment installation',
+        'Equipment maintenance',
+        'Software maintenance',
+        'Reports',
+        'Others',
+    ];
 
     return trigger ? (
         <div className="fixed top-0 left-0 h-screen w-screen flex justify-center items-center bg-black bg-opacity-10 m-auto">
@@ -100,34 +127,7 @@ const NewCard = ({ trigger, setTrigger }) => {
                         <div className="flex flex-col border-t py-6">
                             <label className="pb-2 text-sm">Type</label>
                             <div className="border rounded hover:border-blue-600">
-                                <select
-                                    className="h-10 w-full rounded px-4 items-center cursor-pointer appearance-none text-xs border-none bg-gray-200 hover:bg-white"
-                                    type="text"
-                                    name="type"
-                                    placeholder="Select an option"
-                                >
-                                    <option value="">
-                                        {'User login (add / remove)'}
-                                    </option>
-                                    <option value="">
-                                        {'Internet Connection issue'}
-                                    </option>
-                                    <option value="">{'Telecom issue'}</option>
-                                    <option value="">
-                                        {'Software installation'}
-                                    </option>
-                                    <option value="">
-                                        {'Equipment installation'}
-                                    </option>
-                                    <option value="">
-                                        {'Equipment maintenance'}
-                                    </option>
-                                    <option value="">
-                                        {'Software maintenance'}
-                                    </option>
-                                    <option value="">{'Reports'}</option>
-                                    <option value="">{'Others'}</option>
-                                </select>
+                                <Select options={typeOptions} />
                             </div>
                             <p className="text-xs text-red-900">
                                 {errors.type?.message}

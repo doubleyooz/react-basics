@@ -95,11 +95,17 @@ const NewCard = ({ trigger, setTrigger }) => {
                             <span className="font-bold">New ticket</span>
                         </div>
                         <div className="flex flex-col border-t py-6">
-                            <label className="pb-2 text-sm">
+                            <label
+                                className={`${
+                                    errors.title ? 'text-red-900 ' : ''
+                                }pb-2 text-sm`}
+                            >
                                 *What is your request?
                             </label>
                             <input
-                                className="h-10 w-full rounded px-4 items-center bg-gray-200 border outline-none hover:bg-white hover:border-blue-600"
+                                className={`${
+                                    errors.title ? 'border-red-900 ' : ''
+                                }h-10 w-full rounded px-4 items-center bg-gray-200 border outline-none hover:bg-white hover:border-blue-600`}
                                 type="text"
                                 {...register('title')}
                                 placeholder="Type here..."
@@ -110,11 +116,17 @@ const NewCard = ({ trigger, setTrigger }) => {
                         </div>
 
                         <div className="flex flex-col border-t py-6">
-                            <label className="pb-2 text-sm">
+                            <label
+                                className={`${
+                                    errors.requester ? 'text-red-900 ' : ''
+                                }pb-2 text-sm`}
+                            >
                                 Requester info
                             </label>
                             <input
-                                className="h-10 w-full rounded px-4 items-center bg-gray-200 border outline-none hover:bg-white hover:border-blue-600 "
+                                className={`${
+                                    errors.requester ? 'border-red-900 ' : ''
+                                }h-10 w-full rounded px-4 items-center bg-gray-200 border outline-none hover:bg-white hover:border-blue-600`}
                                 type="text"
                                 {...register('requester')}
                                 placeholder="Type here..."
@@ -125,8 +137,18 @@ const NewCard = ({ trigger, setTrigger }) => {
                         </div>
 
                         <div className="flex flex-col border-t py-6">
-                            <label className="pb-2 text-sm">Type</label>
-                            <div className="border rounded hover:border-blue-600">
+                            <label
+                                className={`${
+                                    errors.type ? 'text-red-900 ' : ''
+                                }pb-2 text-sm`}
+                            >
+                                Type
+                            </label>
+                            <div
+                                className={`${
+                                    errors.type ? 'border-red-900 ' : ''
+                                }border rounded hover:border-blue-600`}
+                            >
                                 <Select options={typeOptions} />
                             </div>
                             <p className="text-xs text-red-900">

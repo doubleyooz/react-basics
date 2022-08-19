@@ -1,0 +1,19 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 48 48"
+    fill="currentColor"
+    class="injected-svg-3"
+    data-src="https://pipestyle.staticpipefy.com/icons/template/mac-xl.svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.041 31.265c.082.39.27.773.54 1.083.365.421.819.644 1.262.644h23.314c.443 0 .897-.223 1.263-.644.268-.31.457-.692.539-1.083h-9.343c-.328.52-.903.864-1.557.864H20.94c-.654 0-1.229-.344-1.557-.864H10.04Zm-.472-1.007a.572.572 0 0 0-.569.575C9 32.423 10.273 34 11.843 34h23.314C36.727 34 38 32.423 38 30.833a.572.572 0 0 0-.569-.575h-10.52a.858.858 0 0 1-.852.863H20.94a.858.858 0 0 1-.853-.863H9.568Z"
+    ></path>
+    <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.493 15.504A.5.5 0 0 1 10.99 15h24.878a.5.5 0 0 1 .497.504v15.113h-.995v-14.61H11.488v14.61h-.995V15.504Z"
+    ></path>
+</svg>

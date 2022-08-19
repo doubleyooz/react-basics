@@ -14,7 +14,7 @@ const List = ({ title, description, colour, label }) => {
                 className="flex justify-between items-center p-2 mb-2 min-h-11 border-t-2 bg-white rounded"
                 style={{ borderColor: colour }}
             >
-                <div className="flex gap-3 items-center ">
+                <div className="flex gap-3 items-center">
                     <span
                         className="font-semibold text-base"
                         style={{ color: colour }}
@@ -36,22 +36,21 @@ const List = ({ title, description, colour, label }) => {
                     <Add />
                 </button>
             </header>
-            <div
-                className="justify-center p-3 h-96 overflow-auto scrollbar-hide"
-                style={{ backgroundColor: '#f2f2f2' }}
-            >
-                <Card title="Unstable internet connection"></Card>
-                <Card
-                    title="My telephone is not working properly"
-                    label={2}
-                ></Card>
-                <Card title="Unstable internet connection"></Card>
-                <Card
-                    title="My telephone is not working properly"
-                    label={1}
-                ></Card>
-                <div className="text-xs text-center font-medium text-gray-400">
-                    {description}
+            <div className="pt-3" style={{ backgroundColor: '#f2f2f2' }}>
+                <div className="justify-center px-3 pb-3 h-96 overflow-auto scrollbar-hide">
+                    <Card title="Unstable internet connection"></Card>
+                    <Card
+                        title="My telephone is not working properly"
+                        label={2}
+                    ></Card>
+                    <Card title="Unstable internet connection"></Card>
+                    <Card
+                        title="My telephone is not working properly"
+                        label={1}
+                    ></Card>
+                    <div className="text-xs text-center font-medium text-gray-400">
+                        {description}
+                    </div>
                 </div>
             </div>
         </div>

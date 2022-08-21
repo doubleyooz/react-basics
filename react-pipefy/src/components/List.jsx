@@ -1,11 +1,31 @@
 import { useState } from 'react';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import Card from './Card';
 import Popup from './NewCard';
 
 import { ReactComponent as Add } from '../assets/add.svg';
 
-const List = ({ title, description, colour, label }) => {
+const data = [
+    {
+        title: 'Unstable internet connection',
+    },
+    { title: 'I cannot access some domains', label: 2 },
+    { title: 'My telephone is not working properly', label: 1 },
+];
+
+const List = ({ title, description, colour }) => {
     const [showPopup, setShowPopup] = useState(false);
+    const [chores, setChores] = useState(data);
+
+    const handleOnDragEnd = (result) => {
+        if (!result.destination) return;
+        const items = Array.from(chores);
+
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        setChores(items);
+    };
 
     return (
         <div className="w-fit ml-6 rounded-sm">
@@ -36,23 +56,47 @@ const List = ({ title, description, colour, label }) => {
                     <Add />
                 </button>
             </header>
-            <div className="pt-3" style={{ backgroundColor: '#f2f2f2' }}>
-                <div className="justify-center px-3 pb-3 h-96 overflow-auto scrollbar-hide">
-                    <Card title="Unstable internet connection"></Card>
-                    <Card
-                        title="My telephone is not working properly"
-                        label={2}
-                    ></Card>
-                    <Card title="Unstable internet connection"></Card>
-                    <Card
-                        title="My telephone is not working properly"
-                        label={1}
-                    ></Card>
-                    <div className="text-xs text-center font-medium text-gray-400">
-                        {description}
-                    </div>
-                </div>
-            </div>
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId="chores">
+                    {(provided) => (
+                        <div
+                            className="pt-3"
+                            style={{ backgroundColor: '#f2f2f2' }}
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            <div className="justify-center px-3 pb-3 h-96 overflow-auto scrollbar-hide">
+                                {chores.map((element, index) => {
+                                    return (
+                                        <Draggable
+                                            key={element.title + index}
+                                            draggableId={element.title + index}
+                                            index={index}
+                                        >
+                                            {(provided) => (
+                                                <div
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                    ref={provided.innerRef}
+                                                >
+                                                    <Card
+                                                        title={element.title}
+                                                        label={element.label}
+                                                    ></Card>
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    );
+                                })}
+                                {provided.placeholder}
+                                <div className="text-xs text-center font-medium text-gray-400">
+                                    {description}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
         </div>
     );
 };

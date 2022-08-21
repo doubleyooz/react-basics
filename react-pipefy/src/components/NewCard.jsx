@@ -83,10 +83,10 @@ const NewCard = ({ trigger, setTrigger }) => {
                     </div>
                 </header>
                 <form
-                    className="flex flex-col w-full h-96 px-8 pt-8 overflow-auto"
+                    className="flex flex-col w-full h-96 px-8 pt-8"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <div className="">
+                    <div className="overflow-auto">
                         <div className="flex mb-6 items-center">
                             <div className="w-10 h-10 text-blue-700 bg-blue-100 mr-4 rounded-md">
                                 <Ticket />

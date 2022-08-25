@@ -14,8 +14,8 @@ const NavBar = () => {
 
                 <NavLink to="/pipes">pipe title</NavLink>
             </div>
-
-            <div>User</div>
+            <NavLink to="/login">User</NavLink>
+            
         </div>
     );
 };

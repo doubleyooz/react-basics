@@ -1,7 +1,7 @@
 const page = () => {
   return (
     <div>
-      <h1 className='text-primary'>AUTHENTICATED</h1>
+      <h1 className='text-primary-default'>AUTHENTICATED</h1>
     </div>
   );
 };

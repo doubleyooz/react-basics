@@ -42,7 +42,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className='min-h-screen bg-secondary-default'>
+    <div className='min-h-screen bg-secondary-50 flex flexCol justify-between'>
       {getNavbar()}
       {getContent()}
       {getFooter()}

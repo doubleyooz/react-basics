@@ -2,7 +2,7 @@ import { SignUp } from '@clerk/nextjs';
 
 const Page = () => {
   return (
-    <div className='flex h-screen justify-center items-center bg-secondary-default'>
+    <div className='flex h-screen justify-center items-center bg-secondary-50'>
       <SignUp />;
     </div>
   );

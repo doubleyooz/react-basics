@@ -18,7 +18,9 @@ const UserMenuLink: React.FC<{
 }> = ({ link, setOpenUserMenu }) => {
   return (
     <Link href={link.path} onClick={() => setOpenUserMenu(false)}>
-      <li className='p-3 rounded-md hover:bg-primary-hover'>{link.name}</li>
+      <li className='p-3 rounded-md bg-primary-600 hover:bg-primary-700'>
+        {link.name}
+      </li>
     </Link>
   );
 };
@@ -38,7 +40,7 @@ const UserMenu = () => {
       <div className='relative'>
         <CgMenuGridO />
         {openUserMenu && (
-          <ul className='absolute bg-primary-default z-[99] top-7 sm:left-[-60px] left-[-80px] text-white rounded-md text-center'>
+          <ul className='absolute bg-primary-600 z-[99] top-7 sm:left-[-60px] left-[-80px] text-white rounded-md text-center'>
             {links.map((link, index) => (
               <UserMenuLink
                 link={link}

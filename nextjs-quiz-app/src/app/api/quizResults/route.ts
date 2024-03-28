@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
       where: { id: userId },
       include: { quizResults: true },
     });
+    console.log({ existingUser });
     if (
       existingUser &&
       existingUser.quizResults &&

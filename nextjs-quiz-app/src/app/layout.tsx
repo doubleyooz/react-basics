@@ -11,7 +11,7 @@ const raleway = Raleway({
 
 export const metadata: Metadata = {
   title: 'CodeQuiz',
-  description: 'Weekly quizzes for developers',
+  description: 'Weekly quiz question for developers',
 };
 
 export default function RootLayout({

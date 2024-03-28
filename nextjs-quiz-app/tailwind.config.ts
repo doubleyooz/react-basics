@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xxs: '360px',
+        xs: '480px',
+      },
+
       colors: {
         primary: {
           '50': '#f1f3fd',

@@ -1,22 +1,26 @@
 import Quiz from '@/components/Quiz';
-
 import { client } from '../../../sanity/lib/client';
 import { fetchUsers } from '../(auth)/actions/fetchUsers';
 
 export const dynamic = 'force-dynamic';
 
 async function getData() {
-  const query = `*[_type == "question"] {
-    question, answers, correctAnswer
+  const query = `*[_type == "questions"]{
+    question,
+    answers,
+    correctAnswer
   }`;
 
-  return await client.fetch(query);
+  const data = await client.fetch(query);
+
+  return data;
 }
 
 const page = async () => {
   const questions = await getData();
   const user = await fetchUsers();
   const userId = user?.data.user.id;
+  console.log('quiz', { user });
   return (
     <>
       <Quiz questions={questions} userId={userId} />

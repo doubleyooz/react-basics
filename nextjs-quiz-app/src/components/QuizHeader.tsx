@@ -3,7 +3,7 @@ import { useState, useEffect, RefObject } from 'react';
 import { forwardRef, useImperativeHandle } from 'react';
 
 interface TimerProps {
-  nextQuestion: () => void;
+  nextQuestion: (finalAnswer: string | null) => void;
 }
 
 export type TimerRef = {
@@ -54,7 +54,7 @@ const Timer = forwardRef<TimerRef, TimerProps>(({ nextQuestion }, ref) => {
   const handleTimeUp = () => {
     stopTimer();
     resetTimer();
-    nextQuestion();
+    nextQuestion(null);
     resetTimer();
     startTimer();
   };

@@ -1,8 +1,9 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import StatCard from './StatCard';
 import QuizHeader, { TimerRef } from './QuizHeader';
+import { shuffleArray } from '@/utils/array';
 
 interface QuizProps {
   questions: {
@@ -13,37 +14,114 @@ interface QuizProps {
   userId: string | undefined;
 }
 
+interface OptionsProps {
+  answers: string[];
+  question: string;
+  btnText: string;
+  nextQuestion: (finalAnswer: string | null) => void;
+}
+
+const OptionsList = ({
+  question,
+  answers,
+  btnText,
+  nextQuestion,
+}: OptionsProps) => {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  console.log('options rerendered');
+
+  const resetOptions = () => {
+    nextQuestion(selectedAnswer);
+    setSelectedAnswer(null);
+  };
+
+  return (
+    <>
+      <ul>
+        {answers.map((answer: string, idx: number) => (
+          <li
+            key={idx}
+            onClick={() => setSelectedAnswer(answer)}
+            className={`cursor-pointer mb-5 py-3 rounded-md hover:bg-primary-400 hover:text-white px-3
+${selectedAnswer === answer && 'bg-primary-600 text-white'}
+`}
+          >
+            <span>{answer}</span>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <h3 className='mb-5 text-2xl font-bold'>{question}</h3>
+
+        <button
+          onClick={resetOptions}
+          disabled={selectedAnswer === null}
+          className={`font-bold transition duration-300 ease-in-out ${selectedAnswer === null ? 'text-dark-300' : 'cursor-pointer'}`}
+        >
+          {btnText}
+        </button>
+      </div>
+    </>
+  );
+};
+
 const Quiz = ({ questions, userId }: QuizProps) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(
-    null
-  );
+
+  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
+
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState({
     score: 0,
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-  const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [checked, setChecked] = useState(false);
-
-  const onAnswerSelected = (answer: string, idx: number) => {
-    setChecked(true);
-    setSelectedAnswerIndex(idx);
-    if (answer === correctAnswer) {
-      setSelectedAnswer(answer);
-    } else {
-      setSelectedAnswer('');
-    }
-  };
-
-  const timerRef = useRef<TimerRef>(null);
 
   const { question, answers, correctAnswer } = questions[activeQuestion];
 
-  const nextQuestion = () => {
+  const timerRef = useRef<TimerRef>(null);
+
+  useEffect(() => {
+    setShuffledOptions(answers);
+  }, [answers]);
+
+  const updateResults = () => {
+    if (activeQuestion !== questions.length - 1) {
+      setActiveQuestion((prev) => prev + 1);
+      timerRef.current?.resetTimer();
+      return;
+    }
+    setShowResults(true);
+    timerRef.current?.stopTimer();
+    fetch('/api/quizResults', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: userId,
+        quizScore: results.score,
+        correctAnswers: results.correctAnswers,
+        wrongAnswers: results.wrongAnswers,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not working');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Quiz results saved successfully:', data);
+      })
+      .catch((error) => {
+        console.error('Error saving quiz results:', error);
+      });
+  };
+
+  const nextQuestion = (finalAnswer: string | null) => {
     setResults((prev) =>
-      selectedAnswer
+      finalAnswer === correctAnswer
         ? {
             ...prev,
             score: prev.score + 5,
@@ -54,40 +132,8 @@ const Quiz = ({ questions, userId }: QuizProps) => {
             wrongAnswers: prev.wrongAnswers + 1,
           }
     );
-    if (activeQuestion !== questions.length - 1) {
-      setActiveQuestion((prev) => prev + 1);
-      timerRef.current?.resetTimer();
-    } else {
-      setShowResults(true);
-      timerRef.current?.stopTimer();
-      fetch('/api/quizResults', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: userId,
-          quizScore: results.score,
-          correctAnswers: results.correctAnswers,
-          wrongAnswers: results.wrongAnswers,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not working');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log('Quiz results saved successfully:', data);
-        })
-        .catch((error) => {
-          console.error('Error saving quiz results:', error);
-        });
-    }
+    updateResults();
   };
-
-  //shuffleArray(answers);
 
   return (
     <div className='min-h-[500px]'>
@@ -100,31 +146,16 @@ const Quiz = ({ questions, userId }: QuizProps) => {
               timerRef={timerRef}
               questionsLength={questions.length}
             />
-            <ul>
-              {answers.map((answer: string, idx: number) => (
-                <li
-                  key={idx}
-                  onClick={() => onAnswerSelected(answer, idx)}
-                  className={`cursor-pointer mb-5 py-3 rounded-md hover:bg-primary-600 hover:text-white px-3
-      ${selectedAnswerIndex === idx && 'bg-primary-600 text-white'}
-      `}
-                >
-                  <span>{answer}</span>
-                </li>
-              ))}
-            </ul>
-            <div>
-              <h3 className='mb-5 text-2xl font-bold'>{question}</h3>
-
-              <button
-                onClick={nextQuestion}
-                className={`font-bold transition duration-300 ease-in-out ${selectedAnswerIndex === null ? 'text-dark-300' : ' cursor-pointer'}`}
-              >
-                {activeQuestion === questions.length - 1
+            <OptionsList
+              answers={shuffledOptions}
+              question={question}
+              nextQuestion={nextQuestion}
+              btnText={
+                activeQuestion === questions.length - 1
                   ? 'Finish'
-                  : 'Next Question →'}
-              </button>
-            </div>
+                  : 'Next Question →'
+              }
+            />
           </>
         ) : (
           <div className='text-center'>

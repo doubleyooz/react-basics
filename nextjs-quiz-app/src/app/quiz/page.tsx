@@ -13,13 +13,12 @@ async function getData() {
   }`;
 
   const data = await client.fetch(query);
-
+  shuffleArray(data);
   return data;
 }
 
 const page = async () => {
   const questions = await getData();
-  shuffleArray(questions);
   const user = await fetchUsers();
   const userId = user?.data.user.id;
   return (

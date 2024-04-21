@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import StatCard from './StatCard';
 import QuizHeader, { TimerRef } from './QuizHeader';
 import { shuffleArray } from '@/utils/array';
+import Button from './Button';
 
 interface QuizProps {
   questions: {
@@ -53,13 +54,11 @@ ${selectedAnswer === answer && 'bg-primary-600 text-white'}
       <div>
         <h3 className='mb-5 text-2xl font-bold'>{question}</h3>
 
-        <button
-          onClick={resetOptions}
+        <Button
+          handleClick={resetOptions}
           disabled={selectedAnswer === null}
-          className={`font-bold transition duration-300 ease-in-out ${selectedAnswer === null ? 'text-dark-300' : 'cursor-pointer'}`}
-        >
-          {btnText}
-        </button>
+          text={btnText}
+        />
       </div>
     </>
   );
@@ -67,7 +66,7 @@ ${selectedAnswer === answer && 'bg-primary-600 text-white'}
 
 const Quiz = ({ questions, userId }: QuizProps) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
-
+  const [isShuffled, setIsShuffled] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
 
   const [showResults, setShowResults] = useState(false);
@@ -82,16 +81,22 @@ const Quiz = ({ questions, userId }: QuizProps) => {
   const timerRef = useRef<TimerRef>(null);
 
   useEffect(() => {
-    setShuffledOptions(answers);
-  }, [answers]);
+    if (!isShuffled) {
+      setIsShuffled(true);
+      shuffleArray(answers);
+      setShuffledOptions(answers);
+    }
+  }, [answers, isShuffled]);
 
   const updateResults = () => {
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
+      setIsShuffled(false);
       timerRef.current?.resetTimer();
       return;
     }
     setShowResults(true);
+
     timerRef.current?.stopTimer();
     fetch('/api/quizResults', {
       method: 'POST',
@@ -173,12 +178,12 @@ const Quiz = ({ questions, userId }: QuizProps) => {
               />
               <StatCard title='Wrong Answers' value={results.wrongAnswers} />
             </div>
-            <button
-              onClick={() => window.location.reload()}
-              className='mt-10 font-bold uppercase'
-            >
-              Restart Quiz
-            </button>
+
+            <Button
+              handleClick={() => window.location.reload()}
+              text='Restart Quiz'
+              uppercase
+            />
           </div>
         )}
       </div>

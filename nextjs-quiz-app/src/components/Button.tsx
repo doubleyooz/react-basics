@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       disabled={disabled}
       onClick={() => handleClick()}
-      className={`mt-10 font-bold transition duration-300 ease-in-out ${uppercase ? 'uppercase' : ''} ${disabled ? 'text-dark-300' : ''}`}
+      className={`mt-10 font-bold transition duration-300 ease-in-out ${uppercase && 'uppercase'} ${disabled && 'text-dark-300'}`}
       aria-label={text}
     >
       {text}

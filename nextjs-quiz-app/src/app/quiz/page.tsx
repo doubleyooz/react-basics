@@ -1,6 +1,7 @@
 import Quiz from '@/components/Quiz';
 import { client } from '../../../sanity/lib/client';
 import { fetchUsers } from '../(auth)/actions/fetchUsers';
+import { shuffleArray } from '@/utils/array';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,9 +19,9 @@ async function getData() {
 
 const page = async () => {
   const questions = await getData();
+  shuffleArray(questions);
   const user = await fetchUsers();
   const userId = user?.data.user.id;
-  console.log('quiz', { user });
   return (
     <>
       <Quiz questions={questions} userId={userId} />

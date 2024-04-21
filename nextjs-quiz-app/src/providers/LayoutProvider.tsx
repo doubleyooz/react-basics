@@ -10,7 +10,9 @@ import Footer from '@/components/Footer';
 
 function LayoutProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isPublicRoute = ['sign-in', 'sign-up'].includes(pathname.split('/')[1]);
+  const isPublicRoute = ['sign-in', 'sign-up', 'sign-out'].includes(
+    pathname.split('/')[1]
+  );
   const { isLoaded, isSignedIn, user } = useUser(); // Use the useUser hook
 
   const getNavbar = () => {

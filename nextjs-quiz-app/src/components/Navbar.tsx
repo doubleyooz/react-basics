@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
           </span>
         </div>
         <div className='flex items-center gap-3 justify-end'>
-          <UserMenu /> <UserButton />
+          <UserMenu /> <UserButton afterSignOutUrl='/' />
         </div>
       </div>
     </div>

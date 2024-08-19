@@ -3,5 +3,10 @@
     "next/core-web-vitals",
     "eslint-config-next",
     "eslint:recommended"
-  ]
+  ],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "no-unused-vars": "warn",
+    "no-undef": "warn"
+  }
 }

@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { fetchUsers } from '@/app/(auth)/actions/fetchUsers';
 import { useUser } from '@clerk/nextjs';
+import type React from 'react';
 import { useEffect, useState } from 'react';
 
 import Navbar from '@/components/Navbar';

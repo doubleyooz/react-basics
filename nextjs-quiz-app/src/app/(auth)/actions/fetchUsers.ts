@@ -1,12 +1,13 @@
 'use server';
 import { prisma } from '@/lib/prisma';
 import { currentUser } from '@clerk/nextjs';
+import { User } from '@prisma/client';
 
 export const fetchUsers = async () => {
   try {
     const clerkUser = await currentUser();
 
-    let mongoUser = null;
+    let mongoUser: User | null = null;
     mongoUser = await prisma.user.findUnique({
       where: {
         clerkUserId: clerkUser?.id,
@@ -30,7 +31,7 @@ export const fetchUsers = async () => {
 
     const quizResults = await prisma.quizResult.findMany({
       where: {
-        userId: mongoUser.id,
+        userId: mongoUser!.id,
       },
     });
 

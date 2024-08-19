@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type React from 'react';
 import { useState } from 'react';
 import { CgMenuGridO } from 'react-icons/cg';
 

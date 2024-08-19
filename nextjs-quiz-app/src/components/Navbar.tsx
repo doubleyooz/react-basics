@@ -1,4 +1,5 @@
 'use client';
+import type React from 'react';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { MdQuiz } from 'react-icons/md';

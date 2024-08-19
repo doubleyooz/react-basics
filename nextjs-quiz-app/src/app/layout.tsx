@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type React from 'react';
 import { Raleway } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';

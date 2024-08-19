@@ -21,10 +21,14 @@ const page = async () => {
   const questions = await getData();
   shuffleArray(questions);
   const user = await fetchUsers();
-  const userId = user?.data.user.id;
+  const userId = user?.data?.user?.id;
   return (
     <>
-      <Quiz questions={questions} userId={userId} />
+      {userId ? (
+        <Quiz questions={questions} userId={userId} />
+      ) : (
+        <span>No user</span>
+      )}
     </>
   );
 };

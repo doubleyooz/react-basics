@@ -1,8 +1,10 @@
-import Card, { CardProps } from "@/components/Card";
+import Box, { BoxProps } from "@/components/Box";
+import Card from "@/components/Card";
 import Header from "@/components/Header";
+import TextField from "@/components/TextField";
 
 
-const mockData: CardProps[] = [
+const mockData: BoxProps[] = [
   { title: "Total Links", content: "250" },
   { title: "Articles", content: "100" },
   { title: "Categories", content: "50" },
@@ -20,10 +22,11 @@ export default function Home() {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5 mb-7">
         {
           mockData.map((item, index) => (
-            <Card key={index} title={item.title} content={item.content} />
+            <Box key={index} title={item.title} content={item.content} />
           ))
         }
       </div>
+      <Card title="Search" contentBody={<TextField title="Search" register={{}} error={{}} />} />
 
     </main>
 

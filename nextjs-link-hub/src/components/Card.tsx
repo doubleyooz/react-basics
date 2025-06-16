@@ -1,16 +1,17 @@
 
 export type CardProps = {
     title: string;
-    content: string;
+    contentBody: React.ReactNode;
 };
 
 
 
-const Card = ({ title, content }: CardProps) => {
+const Card = ({ title, contentBody: Component }: CardProps) => {
     return (
         <div className="opacity-95 bg-white rounded-2xl p-5 text-center shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-white border-opacity-20">
-            <div className="text-3xl font-bold text-[#667eea] mb-1" id="totalLinks">{content}</div>
-            <div className="text-gray-600 text-sm uppercase font-medium">{title}</div>
+
+            <div className="text-2xl mb-5 text-gray-700 flex items-center gap-[10px]">{title}</div>
+            <div className="mt-2">{Component}</div>
         </div>
     );
 };

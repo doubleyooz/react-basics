@@ -1,5 +1,7 @@
+'use client'
 import Box, { BoxProps } from "@/components/Box";
 import Card from "@/components/Card";
+import AddLink from "@/components/cards/AddLink";
 import Header from "@/components/Header";
 import TextField from "@/components/TextField";
 
@@ -26,7 +28,7 @@ export default function Home() {
           ))
         }
       </div>
-      <Card title="Search" contentBody={<TextField title="Search" register={{}} error={{}} />} />
+      <AddLink />
 
     </main>
 

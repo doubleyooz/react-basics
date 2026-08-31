@@ -6,7 +6,7 @@ export const profile = {
   github: "https://github.com/doubleyooz",
   linkedin: "https://www.linkedin.com/in/joanderson-de-souza-774371212/",
   // TODO: replace with a real inbox before publishing.
-  email: "hello@joanderson.dev",
+  email: "sirjoandersonwf@gmail.com",
 };
 
 export const stack = [

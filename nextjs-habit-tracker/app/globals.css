@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #EDEAE0;
+  background-image:
+    linear-gradient(#D3CDB9 1px, transparent 1px);
+  background-size: 100% 2.35rem;
+  background-position: 0 6.4rem;
+}
+
+::selection {
+  background: #3F6B4E;
+  color: #EDEAE0;
+}
+
+/* Visible keyboard focus, respected everywhere */
+:focus-visible {
+  outline: 2px solid #A8542E;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Hand-drawn-feel checkbox tick */
+.tick-check {
+  clip-path: polygon(14% 44%, 0 59%, 39% 100%, 100% 21%, 84% 8%, 37% 71%);
+}

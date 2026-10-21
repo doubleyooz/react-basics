@@ -12,8 +12,6 @@ html, body {
 
 body {
   background-color: #EDEAE0;
-  background-image:
-    linear-gradient(#D3CDB9 1px, transparent 1px);
   background-size: 100% 2.35rem;
   background-position: 0 6.4rem;
 }

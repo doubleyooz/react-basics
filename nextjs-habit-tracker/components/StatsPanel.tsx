@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "./Button";
+
 const MOODS = [
   { v: 1, label: "rough" },
   { v: 2, label: "low" },
@@ -77,19 +79,17 @@ export default function StatsPanel({
         <p className="text-sm text-inkSoft mb-2">mood</p>
         <div className="flex gap-2">
           {MOODS.map((m) => (
-            <button
+
+            <Button
               key={m.v}
               aria-label={m.label}
               aria-pressed={mood === m.v}
               onClick={() => onMood(mood === m.v ? null : m.v)}
-              className={`h-8 w-8 border text-xs grid place-items-center transition-colors ${
-                mood === m.v
-                  ? "bg-ink border-ink text-paper"
-                  : "border-line text-inkSoft hover:border-ink"
-              }`}
-            >
-              {m.v}
-            </button>
+              size='small'
+              label={m.v.toString()}
+              variant={mood === m.v ? "inkSoft" : "default"}
+
+            />
           ))}
         </div>
       </div>

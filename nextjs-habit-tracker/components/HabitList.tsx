@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import type { Habit } from "@/lib/types";
+import { Button } from "./Button";
+import { CheckBox } from "./Checkbox";
 
 export default function HabitList({
   habits,
@@ -40,39 +42,30 @@ export default function HabitList({
               key={habit.id}
               className="group flex items-center gap-4 py-3 border-b border-line"
             >
-              <button
-                role="checkbox"
-                aria-checked={done}
+              <CheckBox
+                done={done}
                 aria-label={done ? `Mark ${habit.name} as not done` : `Mark ${habit.name} as done`}
-                onClick={() => onToggle(habit.id)}
-                className={`relative h-6 w-6 shrink-0 border transition-colors ${
-                  done ? "bg-moss border-moss" : "border-inkSoft/60 bg-transparent"
-                }`}
-              >
-                {done && (
-                  <span className="tick-check absolute inset-0 bg-paper" />
-                )}
-              </button>
-
+                onClick={() => onToggle(habit.id)} />
+              
+           
               <span aria-hidden className="text-lg w-5 text-center shrink-0">
                 {habit.emoji}
               </span>
 
               <span
-                className={`flex-1 text-[0.98rem] ${
-                  done ? "text-inkSoft line-through decoration-sage" : "text-ink"
-                }`}
+                className={`flex-1 text-[0.98rem] ${done ? "text-inkSoft line-through decoration-sage" : "text-ink"
+                  }`}
               >
                 {habit.name}
               </span>
-
-              <button
-                onClick={() => onArchive(habit.id)}
+           
+              <Button
                 aria-label={`Remove ${habit.name}`}
+                label="remove"
+                onClick={() => onArchive(habit.id)}
                 className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 text-xs text-inkSoft hover:text-clay transition-opacity px-2"
-              >
-                remove
-              </button>
+                noBorder
+              />
             </li>
           );
         })}
@@ -94,30 +87,33 @@ export default function HabitList({
             placeholder="Name the habit"
             className="h-9 flex-1 border border-line bg-transparent px-3 text-[0.95rem] focus:border-ink outline-none"
           />
-          <button
+
+          <Button
+            label="Add"
             type="submit"
-            className="h-9 px-3 bg-ink text-paper text-sm hover:bg-inkSoft transition-colors"
-          >
-            Add
-          </button>
-          <button
-            type="button"
+            variant="inkSoft"
+          />
+
+          <Button
+            label="Cancel"
+            type="submit"
+            variant="secondary"
             onClick={() => {
               setAdding(false);
               setName("");
             }}
-            className="h-9 px-3 border border-line text-sm hover:border-ink transition-colors"
-          >
-            Cancel
-          </button>
+          />
+
         </form>
       ) : (
-        <button
+        <Button
+          label="  + add a habit"
           onClick={() => setAdding(true)}
-          className="mt-3 text-sm text-inkSoft hover:text-ink transition-colors"
-        >
-          + add a habit
-        </button>
+          className="mt-3 text-inkSoft hover:text-ink"
+          fullWidth
+          noBorder
+        />
+
       )}
     </section>
   );

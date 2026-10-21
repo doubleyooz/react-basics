@@ -28,6 +28,9 @@ const config: Config = {
         sm: "2px",
         DEFAULT: "3px",
       },
+      screens: {
+        xs: "30rem",
+      },
     },
   },
   plugins: [],

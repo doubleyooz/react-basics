@@ -12,7 +12,7 @@ export default function DayHeader({
   onChange: (next: string) => void;
 }) {
   return (
-    <header className="flex items-end justify-between border-b border-line pb-6">
+    <header className="flex items-end flex-wrap justify-center xs:justify-between border-b border-line pb-6 gap-2">
       <div className="flex items-end gap-5">
         <span className="font-display text-[5.5rem] leading-[0.8] tracking-tight text-ink">
           {dayNumber(date)}

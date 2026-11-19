@@ -21,9 +21,9 @@ const impactLabels = {
 
 export const CreatorCard: React.FC<CreatorCardProps> = ({ creator }) => {
   return (
-    <div className="bg-white border-2 border-gray-200 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500 flex flex-col">
+    <div className="bg-white border-2 border-gray-200 cursor-pointer rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-purple-500 flex flex-col">
       <div className="flex items-center gap-4 mb-4">
-        <div className="w-15 h-15 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+        <div className="w-15 h-15 rounded-full bg-linear-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
           {creator.logo ? (
             <img src={creator.logo} alt={creator.name} className="w-full h-full rounded-full object-cover" />
           ) : (
